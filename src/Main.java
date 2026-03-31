@@ -10,7 +10,9 @@ public class Main {
             System.out.println("1. Add Complaint");
             System.out.println("2. View Complaints");
             System.out.println("3. Resolve Complaint");
-            System.out.println("4. Exit");
+            System.out.println("4. Search Complaint by ID");
+            System.out.println("5. Show Statistics");
+            System.out.println("6. Exit");
 
             System.out.print("Enter choice: ");
             int choice = sc.nextInt();
@@ -20,7 +22,14 @@ public class Main {
                 case 1:
                     System.out.print("Enter complaint: ");
                     String desc = sc.nextLine();
-                    manager.addComplaint(desc);
+
+                    System.out.print("Enter category (Electrical/WiFi/Water/Mess/Other): ");
+                    String category = sc.nextLine();
+
+                    System.out.print("Enter priority (High/Medium/Low): ");
+                    String priority = sc.nextLine();
+
+                    manager.addComplaint(desc, priority, category);
                     break;
 
                 case 2:
@@ -34,6 +43,16 @@ public class Main {
                     break;
 
                 case 4:
+                    System.out.print("Enter complaint ID: ");
+                    int searchId = sc.nextInt();
+                    manager.searchComplaint(searchId);
+                    break;
+
+                case 5:
+                    manager.showStats();
+                    break;
+
+                case 6:
                     System.out.println("Exiting...");
                     return;
 

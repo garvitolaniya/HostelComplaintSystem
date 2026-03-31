@@ -4,8 +4,8 @@ class ComplaintManager {
     ArrayList<Complaint> complaints = new ArrayList<>();
     int count = 1;
 
-    void addComplaint(String desc) {
-        Complaint c = new Complaint(count++, desc);
+    void addComplaint(String desc, String priority, String category) {
+        Complaint c = new Complaint(count++, desc, priority, category);
         complaints.add(c);
         System.out.println("Complaint added successfully!");
     }
@@ -16,7 +16,7 @@ class ComplaintManager {
             return;
         }
 
-        System.out.println("\nID | Description | Status");
+        System.out.println("\nID | Description | Category | Priority | Status");
         for (Complaint c : complaints) {
             c.display();
         }
@@ -31,5 +31,34 @@ class ComplaintManager {
             }
         }
         System.out.println("Complaint not found.");
+    }
+
+    void searchComplaint(int id) {
+        for (Complaint c : complaints) {
+            if (c.id == id) {
+                System.out.println("\nComplaint Found:");
+                c.display();
+                return;
+            }
+        }
+        System.out.println("Complaint not found.");
+    }
+
+    void showStats() {
+        int total = complaints.size();
+        int resolved = 0;
+
+        for (Complaint c : complaints) {
+            if (c.status.equals("Resolved")) {
+                resolved++;
+            }
+        }
+
+        int pending = total - resolved;
+
+        System.out.println("\n--- Statistics ---");
+        System.out.println("Total Complaints: " + total);
+        System.out.println("Resolved: " + resolved);
+        System.out.println("Pending: " + pending);
     }
 }
